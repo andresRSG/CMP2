@@ -49,6 +49,7 @@ dependencies {
     //FOR SERVICES API/REST
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    //FOR IMAGE
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     implementation 'com.makeramen:roundedimageview:2.3.0'
 

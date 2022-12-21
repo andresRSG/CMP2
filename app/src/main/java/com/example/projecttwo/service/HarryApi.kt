@@ -10,7 +10,7 @@ interface HarryApi {
 
     @GET("api/people/")
     fun getPeople(
-    ): Call<Model>
-    
+    ): Call<PersonModel>
+
 
 }

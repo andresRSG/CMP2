@@ -3,9 +3,13 @@ package com.example.projecttwo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.projecttwo.adapter.AdapterPeople
 import com.example.projecttwo.databinding.ActivityMainBinding
 import com.example.projecttwo.service.HarryApi
-import com.example.projecttwo.service.Model
+import com.example.projecttwo.service.InfoPerson
+import com.example.projecttwo.service.PersonModel
 import com.example.projecttwo.util.Constants
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -27,16 +31,23 @@ class MainActivity : AppCompatActivity() {
         val call = Constants.getRetrofit().create(HarryApi::class.java).getPeople()
 
         CoroutineScope(Dispatchers.IO).launch {
-            call.enqueue(object : Callback<Model>{
+            call.enqueue(object : Callback<PersonModel>{
                 override fun onResponse(
-                    call: Call<Model>,
-                    response: Response<Model>
+                    call: Call<PersonModel>,
+                    response: Response<PersonModel>
                 ) {
                     Log.d(Constants.LOGTAG, "Respuesta del servidor: ${response.toString()}")
+                    var peopleResponse = response.body()
+                    var listInfoPerson: ArrayList<InfoPerson> = peopleResponse!!.people
+
+                    binding.rvMenu.layoutManager = LinearLayoutManager(this@MainActivity)
+                    binding.rvMenu.adapter = AdapterPeople(this@MainActivity, listInfoPerson)
+
+                    binding.pbConexion.visibility = View.GONE
 
                 }
 
-                override fun onFailure(call: Call<Model>, t: Throwable) {
+                override fun onFailure(call: Call<PersonModel>, t: Throwable) {
                     TODO("Not yet implemented")
                 }
             })
