@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.projecttwo.R
 import com.example.projecttwo.databinding.PeopleElementBinding
 import com.example.projecttwo.service.InfoPerson
 
@@ -24,10 +25,11 @@ class AdapterPeople(private val context:Context, private val peopleList: List<In
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.tvName.text = peopleList[position]!!.name
-        holder.tvHeight.text = peopleList[position]!!.height
-        holder.tvBirthYear.text = peopleList[position]!!.birth_year
-        holder.tvGender.text = peopleList[position]!!.gender
+        holder.tvName.text = context.getString(R.string.person_name, peopleList[position].name)
+        holder.tvHeight.text = context.getString(R.string.person_height, peopleList[position].height)
+        holder.tvBirthYear.text =context.getString(R.string.person_birthYear, peopleList[position].birth_year)
+        holder.tvGender.text = context.getString(R.string.person_gender, peopleList[position].gender)
+
 
     }
 

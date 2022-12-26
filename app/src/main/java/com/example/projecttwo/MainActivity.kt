@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<PersonModel>, t: Throwable) {
-                    TODO("Not yet implemented")
+                    println(call)
                 }
             })
 
