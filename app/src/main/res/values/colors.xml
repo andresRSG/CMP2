@@ -13,6 +13,9 @@
     <color name="star_red">#201652</color>
     <color name="star_cream">#F3DCB3</color>
 
+    <color name="transparent">#00FFFFFF</color>
+
+
 
 
 </resources>

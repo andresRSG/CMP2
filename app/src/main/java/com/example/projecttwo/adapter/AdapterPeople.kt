@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.projecttwo.MainActivity
 import com.example.projecttwo.R
 import com.example.projecttwo.databinding.PeopleElementBinding
 import com.example.projecttwo.service.InfoPerson
@@ -30,6 +31,12 @@ class AdapterPeople(private val context:Context, private val peopleList: List<In
         holder.tvBirthYear.text =context.getString(R.string.person_birthYear, peopleList[position].birth_year)
         holder.tvGender.text = context.getString(R.string.person_gender, peopleList[position].gender)
 
+        holder.itemView.setOnClickListener {
+            if(context is MainActivity) peopleList[position].homeworld?.let { it1 ->
+                context.clickPerson(
+                    it1, peopleList[position].films )
+            }
+        }
 
     }
 

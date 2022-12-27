@@ -1,9 +1,13 @@
 package com.example.projecttwo
 
-import androidx.appcompat.app.AppCompatActivity
+import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projecttwo.adapter.AdapterPeople
 import com.example.projecttwo.databinding.ActivityMainBinding
@@ -37,8 +41,8 @@ class MainActivity : AppCompatActivity() {
                     response: Response<PersonModel>
                 ) {
                     Log.d(Constants.LOGTAG, "Respuesta del servidor: ${response.toString()}")
-                    var peopleResponse = response.body()
-                    var listInfoPerson: ArrayList<InfoPerson> = peopleResponse!!.people
+                    val peopleResponse = response.body()
+                    val listInfoPerson: ArrayList<InfoPerson> = peopleResponse!!.people
 
                     binding.rvMenu.layoutManager = LinearLayoutManager(this@MainActivity)
                     binding.rvMenu.adapter = AdapterPeople(this@MainActivity, listInfoPerson)
@@ -53,5 +57,37 @@ class MainActivity : AppCompatActivity() {
             })
 
         }
+    }
+
+    fun clickPerson(infoPlanet:String, infoMovie: ArrayList<String>){
+        val dialogInfo = Dialog(this)
+        dialogInfo.setContentView(R.layout.dialog_person)
+        dialogInfo.window?.setBackgroundDrawableResource(R.drawable.drawable_bg_alert)
+        val text = dialogInfo.findViewById<TextView>(R.id.text_description_dialog)
+        text.setOnClickListener { dialogInfo.dismiss() }
+        val imgMovie = dialogInfo.findViewById<ImageView>(R.id.imageMovie)
+        val imgPlanet = dialogInfo.findViewById<ImageView>(R.id.imagePlanet)
+
+        imgMovie.setOnClickListener {
+            val intent = Intent(this@MainActivity, MoviesActivity::class.java)
+            val parameters = Bundle()
+            parameters.putStringArrayList("infoMovies",infoMovie)
+            intent.putExtras(parameters)
+            startActivity(intent)
+            dialogInfo.dismiss()
+        }
+
+        imgPlanet.setOnClickListener {
+            val intent = Intent(this@MainActivity, PlanetActivity::class.java)
+            val parameters = Bundle()
+            parameters.putString("infoPlanet", infoPlanet)
+            intent.putExtras(parameters)
+            startActivity(intent)
+            dialogInfo.dismiss()
+        }
+
+        dialogInfo.show()
+
+
     }
 }
