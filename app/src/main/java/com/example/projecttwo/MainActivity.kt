@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.blogspot.atifsoftwares.animatoolib.Animatoo
 import com.example.projecttwo.adapter.AdapterPeople
 import com.example.projecttwo.databinding.ActivityMainBinding
 import com.example.projecttwo.service.HarryApi
@@ -75,6 +76,7 @@ class MainActivity : AppCompatActivity() {
             intent.putExtras(parameters)
             startActivity(intent)
             dialogInfo.dismiss()
+            Animatoo.animateShrink(this@MainActivity)
         }
 
         imgPlanet.setOnClickListener {
@@ -84,10 +86,14 @@ class MainActivity : AppCompatActivity() {
             intent.putExtras(parameters)
             startActivity(intent)
             dialogInfo.dismiss()
+            Animatoo.animateShrink(this@MainActivity)
         }
-
         dialogInfo.show()
 
+    }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        Animatoo.animateSlideDown(this@MainActivity) //fire the slide left animation
     }
 }

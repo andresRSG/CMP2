@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">ProjectTwo</string>
+
+<!--    For info People-->
     <string name="person_name">Nombre: %1$s</string>
     <string name="person_height">Altura: %1$s</string>
     <string name="person_birthYear">Edad: %1$s</string>
@@ -8,13 +10,14 @@
     <string name="peliculas">Películas</string>
 
 
+<!--    For Movies-->
     <string name="starw_movie1">https://aulavirtual.amaurypm.com/cm2023-1/sw1.jpg</string>
     <string name="starw_movie2">https://aulavirtual.amaurypm.com/cm2023-1/sw2.jpg</string>
     <string name="starw_movie3">https://aulavirtual.amaurypm.com/cm2023-1/sw3.jpg</string>
     <string name="starw_movie4">https://aulavirtual.amaurypm.com/cm2023-1/sw4.jpg</string>
     <string name="starw_movie5">https://aulavirtual.amaurypm.com/cm2023-1/sw5.jpg</string>
     <string name="starw_movie6">https://aulavirtual.amaurypm.com/cm2023-1/sw6.jpg</string>
-
+    <string name="image_of">Imagen %1$d de %2$d </string>
 
     <string name="starw_title1">A new hope</string>
     <string name="starw_title2">The Empire strikes back</string>
@@ -22,6 +25,16 @@
     <string name="starw_title4">The Phantom Menace</string>
     <string name="starw_title5">Attack of the clones</string>
     <string name="starw_title6">Revenge of the Sith</string>
+
+    <!--    For info Planet-->
+    <string name="planet_name">Nombre: %1$s</string>
+    <string name="planet_rotation_period">Periodo de Rotación: %1$s</string>
+    <string name="planet_orbital_period">Periodo Orbital: %1$s</string>
+    <string name="planet_diameter">Diámetro: %1$s</string>
+    <string name="planet_climate">Clima: %1$s</string>
+    <string name="planet_terrain">Terreno: %1$s</string>
+    <string name="planet_population">Población: %1$s</string>
+
 
 
 </resources>

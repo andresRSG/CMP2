@@ -1,11 +1,12 @@
 package com.example.projecttwo
 
-import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.projecttwo.databinding.ActivityMoviesBinding
@@ -21,6 +22,7 @@ class MoviesActivity : AppCompatActivity() {
 
     private lateinit var binding:ActivityMoviesBinding
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMoviesBinding.inflate(layoutInflater)
@@ -35,7 +37,6 @@ class MoviesActivity : AppCompatActivity() {
 
         binding.carousel1.apply {
             registerLifecycle(lifecycle)
-
             showTopShadow = true
             topShadowAlpha = 0.15f // 0 to 1, 1 means 100%
             topShadowHeight = 32.dpToPx(context) // px value of dp
@@ -53,7 +54,7 @@ class MoviesActivity : AppCompatActivity() {
 
             imageScaleType = ImageView.ScaleType.CENTER_CROP
 
-            carouselBackground = ColorDrawable(Color.parseColor("#333333"))
+            carouselBackground = ColorDrawable(getColor(R.color.white))
             imagePlaceholder = ContextCompat.getDrawable(
                 this@MoviesActivity,
                 org.imaginativeworld.whynotimagecarousel.R.drawable.carousel_default_placeholder
@@ -98,14 +99,16 @@ class MoviesActivity : AppCompatActivity() {
                         .show()
                 }
 
-                override fun onLongClick(position: Int, carouselItem: CarouselItem) {
-                    Toast.makeText(
-                        this@MoviesActivity,
-                        "You long clicked at position ${position + 1}.",
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
-                }
+                override fun onLongClick(position: Int, carouselItem: CarouselItem) {}
+            }
+        }
+
+        movies?.let {
+            if(it.size == 1) {
+             binding.carousel1.stop()
+             binding.carousel1.autoPlay = false
+             binding.carousel1.infiniteCarousel = false
+
             }
         }
 
@@ -124,7 +127,7 @@ class MoviesActivity : AppCompatActivity() {
               listOne.add(
                   CarouselItem(
                   imageUrl = images[images.indexOf(item)],
-                  caption = "Image ${images.indexOf(item) + 1} of ${images.size}",
+                  caption = getString(R.string.image_of, images.indexOf(item) + 1 , images.size),
                       headers = headers
               ))
             }
@@ -141,7 +144,7 @@ class MoviesActivity : AppCompatActivity() {
         for (item in movies){
             val aux = item.split("/")
             println(aux)
-            Log.d(Constants.LOGTAG, "Aux Images: $aux")
+            Log.d(Constants.LOGTAG, "Aux Title: $aux")
 
             when(aux[5].toInt()){
                 1 ->

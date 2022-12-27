@@ -11,7 +11,6 @@
     android:paddingEnd="10dp"
     android:paddingTop="5dp"
     android:paddingBottom="5dp"
-    android:background="@color/star_cream"
     >
 
     <androidx.cardview.widget.CardView
@@ -32,7 +31,8 @@
                 android:id="@+id/viewBackground"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:background="@drawable/starw1"
+                android:background="@drawable/banner_2"
+                android:scaleType="fitCenter"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 />
