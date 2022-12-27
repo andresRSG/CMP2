@@ -34,7 +34,7 @@
     <string name="planet_climate">Clima: %1$s</string>
     <string name="planet_terrain">Terreno: %1$s</string>
     <string name="planet_population">Población: %1$s</string>
-
+    <string name="sin_datos">No se encuentran datos</string>
 
 
 </resources>

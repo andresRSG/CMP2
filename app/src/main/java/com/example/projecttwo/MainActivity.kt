@@ -41,19 +41,26 @@ class MainActivity : AppCompatActivity() {
                     call: Call<PersonModel>,
                     response: Response<PersonModel>
                 ) {
-                    Log.d(Constants.LOGTAG, "Respuesta del servidor: ${response.toString()}")
-                    val peopleResponse = response.body()
-                    val listInfoPerson: ArrayList<InfoPerson> = peopleResponse!!.people
+                    if(response.body() != null){
+                        Log.d(Constants.LOGTAG, "Respuesta del servidor: ${response.toString()}")
+                        val peopleResponse = response.body()
+                        val listInfoPerson: ArrayList<InfoPerson> = peopleResponse!!.people
 
-                    binding.rvMenu.layoutManager = LinearLayoutManager(this@MainActivity)
-                    binding.rvMenu.adapter = AdapterPeople(this@MainActivity, listInfoPerson)
+                        binding.rvMenu.layoutManager = LinearLayoutManager(this@MainActivity)
+                        binding.rvMenu.adapter = AdapterPeople(this@MainActivity, listInfoPerson)
 
-                    binding.pbConexion.visibility = View.GONE
+                        binding.pbConexion.visibility = View.GONE
+                        binding.tvEmpty.visibility = View.GONE
 
+                    }else{
+                        binding.pbConexion.visibility = View.GONE
+                        binding.tvEmpty.visibility = View.VISIBLE
+                    }
                 }
 
                 override fun onFailure(call: Call<PersonModel>, t: Throwable) {
-                    println(call)
+                    binding.pbConexion.visibility = View.GONE
+                    Log.d(Constants.LOGTAG, "Respuesta del servidor: ${call.toString()}")
                 }
             })
 

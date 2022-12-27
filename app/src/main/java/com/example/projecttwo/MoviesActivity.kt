@@ -4,6 +4,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -30,10 +31,22 @@ class MoviesActivity : AppCompatActivity() {
 
         val bundle = intent.extras
         val movies = bundle?.getStringArrayList("infoMovies")
+        movies?.let { if(it.isNotEmpty()){
+                sliderImages(movies)
+            }else{
+                binding.carousel1.visibility = View.GONE
+                binding.tvEmpty.visibility = View.VISIBLE
+            }
+        }
 
-        val images = movies?.let { checkImagesMovies(it) }
-        val titles = movies?.let { checkTitlesMovies(it) }
+    }
 
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun sliderImages(movies:ArrayList<String>){
+        binding.carousel1.visibility = View.VISIBLE
+
+        val images = checkImagesMovies(movies)
+        val titles = checkTitlesMovies(movies)
 
         binding.carousel1.apply {
             registerLifecycle(lifecycle)
@@ -103,11 +116,11 @@ class MoviesActivity : AppCompatActivity() {
             }
         }
 
-        movies?.let {
+        movies.let {
             if(it.size == 1) {
-             binding.carousel1.stop()
-             binding.carousel1.autoPlay = false
-             binding.carousel1.infiniteCarousel = false
+                binding.carousel1.stop()
+                binding.carousel1.autoPlay = false
+                binding.carousel1.infiniteCarousel = false
 
             }
         }
@@ -115,22 +128,20 @@ class MoviesActivity : AppCompatActivity() {
 
         // Dummy header
         val headers = mutableMapOf<String, String>()
-        titles?.let {
+        titles.let {
             for (item in it){
                 headers["header_key${titles.indexOf(item)}"] = item
             }
         }
 
         val listOne = mutableListOf<CarouselItem>()
-        if (images != null) {
-            for (item in images){
-              listOne.add(
-                  CarouselItem(
-                  imageUrl = images[images.indexOf(item)],
-                  caption = getString(R.string.image_of, images.indexOf(item) + 1 , images.size),
-                      headers = headers
-              ))
-            }
+        for (item in images){
+            listOne.add(
+                CarouselItem(
+                    imageUrl = images[images.indexOf(item)],
+                    caption = getString(R.string.image_of, images.indexOf(item) + 1 , images.size),
+                    headers = headers
+                ))
         }
 
         binding.carousel1.setData(listOne)
@@ -145,21 +156,25 @@ class MoviesActivity : AppCompatActivity() {
             val aux = item.split("/")
             println(aux)
             Log.d(Constants.LOGTAG, "Aux Title: $aux")
-
-            when(aux[5].toInt()){
-                1 ->
-                    listTitles.add(getString(R.string.starw_title1))
-                2 ->
-                    listTitles.add(getString(R.string.starw_title2))
-                3 ->
-                    listTitles.add(getString(R.string.starw_title3))
-                4 ->
-                    listTitles.add(getString(R.string.starw_title4))
-                5 ->
-                    listTitles.add(getString(R.string.starw_title5))
-                6 ->
-                    listTitles.add(getString(R.string.starw_title6))
+            try {
+                when(aux[5].toInt()){
+                    1 ->
+                        listTitles.add(getString(R.string.starw_title1))
+                    2 ->
+                        listTitles.add(getString(R.string.starw_title2))
+                    3 ->
+                        listTitles.add(getString(R.string.starw_title3))
+                    4 ->
+                        listTitles.add(getString(R.string.starw_title4))
+                    5 ->
+                        listTitles.add(getString(R.string.starw_title5))
+                    6 ->
+                        listTitles.add(getString(R.string.starw_title6))
+                }
+            }catch (e:java.lang.Exception){
+                listTitles.add("?????")
             }
+
 
         }
         return listTitles
@@ -174,23 +189,29 @@ class MoviesActivity : AppCompatActivity() {
             val aux = item.split("/")
             println(aux)
             Log.d(Constants.LOGTAG, "Aux Images: $aux")
+            try {
+                when(aux[5].toInt()){
+                    1 ->
+                        listImages.add(getString(R.string.starw_movie1))
+                    2 ->
+                        listImages.add(getString(R.string.starw_movie2))
+                    3 ->
+                        listImages.add(getString(R.string.starw_movie3))
+                    4 ->
+                        listImages.add(getString(R.string.starw_movie4))
+                    5 ->
+                        listImages.add(getString(R.string.starw_movie5))
+                    6 ->
+                        listImages.add(getString(R.string.starw_movie6))
 
-            when(aux[5].toInt()){
-                1 ->
-                    listImages.add(getString(R.string.starw_movie1))
-                2 ->
-                    listImages.add(getString(R.string.starw_movie2))
-                3 ->
-                    listImages.add(getString(R.string.starw_movie3))
-                4 ->
-                    listImages.add(getString(R.string.starw_movie4))
-                5 ->
-                    listImages.add(getString(R.string.starw_movie5))
-                6 ->
-                    listImages.add(getString(R.string.starw_movie6))
-
+                }
+            }catch (e:java.lang.Exception){
+                e.printStackTrace()
+                if(listImages.isEmpty()){
+                    binding.tvEmpty.visibility = View.VISIBLE
+                    binding.carousel1.visibility = View.GONE
+                }
             }
-
         }
         return listImages
     }
