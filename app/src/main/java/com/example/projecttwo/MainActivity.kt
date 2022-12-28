@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
         val imgMovie = dialogInfo.findViewById<ImageView>(R.id.imageMovie)
         val imgPlanet = dialogInfo.findViewById<ImageView>(R.id.imagePlanet)
 
-        dialogInfo.setCancelable(false)
+//        dialogInfo.setCancelable(false)
 
         imgMovie.setOnClickListener {
             val intent = Intent(this@MainActivity, MoviesActivity::class.java)
