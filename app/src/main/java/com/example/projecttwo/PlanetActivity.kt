@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import com.blogspot.atifsoftwares.animatoolib.Animatoo
 import com.example.projecttwo.databinding.ActivityPlanetBinding
 import com.example.projecttwo.service.DetailPlanet
 import com.example.projecttwo.service.HarryApi
@@ -63,5 +64,10 @@ class PlanetActivity : AppCompatActivity() {
 
         }
 
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        Animatoo.animateSlideDown(this@PlanetActivity) //fire the slide left animation
     }
 }

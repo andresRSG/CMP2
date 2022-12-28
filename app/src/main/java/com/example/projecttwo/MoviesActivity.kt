@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.blogspot.atifsoftwares.animatoolib.Animatoo
 import com.example.projecttwo.databinding.ActivityMoviesBinding
 import com.example.projecttwo.util.Constants
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener
@@ -214,6 +215,11 @@ class MoviesActivity : AppCompatActivity() {
             }
         }
         return listImages
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        Animatoo.animateSlideDown(this@MoviesActivity) //fire the slide left animation
     }
 
 
