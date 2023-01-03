@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
         imgMovie.setOnClickListener {
             val intent = Intent(this@MainActivity, MoviesActivity::class.java)
             val parameters = Bundle()
-            parameters.putStringArrayList("infoMovies",infoMovie)
+            parameters.putStringArrayList(Constants.ID_MOVIES,infoMovie)
             intent.putExtras(parameters)
             startActivity(intent)
             dialogInfo.dismiss()
@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity() {
         imgPlanet.setOnClickListener {
             val intent = Intent(this@MainActivity, PlanetActivity::class.java)
             val parameters = Bundle()
-            parameters.putString("infoPlanet", infoPlanet)
+            parameters.putString(Constants.ID_PLANET, infoPlanet)
             intent.putExtras(parameters)
             startActivity(intent)
             dialogInfo.dismiss()

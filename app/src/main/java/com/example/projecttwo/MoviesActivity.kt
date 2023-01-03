@@ -31,7 +31,7 @@ class MoviesActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val bundle = intent.extras
-        val movies = bundle?.getStringArrayList("infoMovies")
+        val movies = bundle?.getStringArrayList(Constants.ID_MOVIES)
         movies?.let { if(it.isNotEmpty()){
                 sliderImages(movies)
             }else{

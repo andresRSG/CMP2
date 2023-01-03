@@ -25,7 +25,7 @@ class PlanetActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val bundle = intent.extras
-        val planetURL = bundle?.getString("infoPlanet")
+        val planetURL = bundle?.getString(Constants.ID_PLANET)
         val planetArray = planetURL?.split("/")
 
 
@@ -38,7 +38,7 @@ class PlanetActivity : AppCompatActivity() {
                 ) {
                     response.let {
                         if(it.body() != null){
-                            Log.d(Constants.LOGTAG, "Respuesta del servidor Planet: ${it.toString()}")
+//                            Log.d(Constants.LOGTAG, "Respuesta del servidor Planet: ${it.toString()}")
                             val planetInfo = it.body()
                             binding.tvNamePlanet.text = getString(R.string.planet_name,planetInfo?.name)
                             binding.tvRotation.text = getString(R.string.planet_rotation_period,planetInfo?.rotation_period)
@@ -57,7 +57,7 @@ class PlanetActivity : AppCompatActivity() {
 
                 override fun onFailure(call: Call<DetailPlanet>, t: Throwable) {
                     binding.pbConexion.visibility = View.GONE
-                    Log.d(Constants.LOGTAG, "Respuesta del servidor Planet: ${call.toString()}")
+//                    Log.d(Constants.LOGTAG, "Respuesta del servidor Planet: ${call.toString()}")
                 }
 
             })
